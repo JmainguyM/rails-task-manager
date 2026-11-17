@@ -13,9 +13,11 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @task.save # Will raise ActiveModel::ForbiddenAttributesError
-
-    redirect_to task_path(@task)
+    if @task.save # Will raise ActiveModel::ForbiddenAttributesError
+      redirect_to task_path(@task)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -39,6 +41,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :details)
+    params.require(:task).permit(:title, :details, :completed)
   end
 end
