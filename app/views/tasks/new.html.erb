@@ -1,0 +1,12 @@
+<h1>coucou</h1>
+
+<h2>Quel tâche voulez vous ajouter?</h2>
+<%= form_with model: @task do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :details %>
+  <%= f.text_field :details %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to "annuler", tasks_path %>
